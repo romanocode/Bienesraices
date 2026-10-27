@@ -4,6 +4,12 @@
 
    $db = conectarDB();
 
+    //Arreglo con mensajes de errores
+
+    $errores =[]; 
+
+
+   //Ejecutar el codigo despues que el usuario envia el formulario
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
     echo"<pre>";
     var_dump($_POST);
@@ -16,6 +22,40 @@
     $wc = $_POST['wc'];
     $estacionamiento = $_POST['estacionamiento'];
     $vendedorId = $_POST['vendedor'];
+
+    if(!$titulo){
+        $errores[] = "Debes añadir un titulo";
+    }
+
+    if(!$precio){
+        $errores[] = "El precio es obligatorio";
+    }
+
+    if ( strlen ($descripcion) < 50 ){
+        $errores[] = "La descripcion es obligatorio y debe de tener al menos 50 caracteres";
+    }
+
+     if(!$habitaciones){
+        $errores[] = "El Numero de habitaciones  es obligatorio";
+    }
+
+     if(!$wc){
+        $errores[] = "El Numero de baños  es obligatorio";
+    }
+
+     if(!$estacionamiento){
+        $errores[] = "El Numero de estacionamiento  es obligatorio";
+    }
+
+     if(!$vendedorId){
+        $errores[] = "Elige el vendedor";
+    }
+
+    var_dump($errores);
+
+    exit;
+
+
 
     // Insertar en la base de datos
 
